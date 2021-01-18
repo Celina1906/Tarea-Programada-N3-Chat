@@ -6,6 +6,7 @@
 from tkinter import *
 import names
 import random
+from tkinter import ttk
 #Clase Contacto
 class Contacto:
     nombre=''
@@ -65,7 +66,7 @@ def boton1Funcion():
     labelContactos.place(x=50,y=120)
     entryCantContactos=Entry(ventana1)
     entryCantContactos.place(x=420,y=200)
-    def aceptar():
+    def aceptar1():
         global listaContactos
         contacto1=None
         try:
@@ -110,24 +111,55 @@ def boton1Funcion():
             labelError.place(x=50,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-    botonAceptar=Button(ventana1,text='Aceptar',width=18,height=2,command=aceptar)
+    botonAceptar=Button(ventana1,text='Aceptar',width=18,height=2,command=aceptar1)
     botonAceptar.place(x=420,y=250)
 def boton2Funcion():
     ventana2=Tk()
     ventana2.title('Insertar contacto')
-    ventana2.geometry('800x300')
+    ventana2.geometry('600x500')
     ventana2.resizable(FALSE,FALSE)
     labelTitulo1 = Label(ventana2, text = "Insertar contacto" , bg="Teal", fg="Azure", font = ('calibri', 40))
     labelTitulo.place(x=20,y=30)
     ventana2.configure(bg='Teal')
     labelTitulo1.place(x=40, y=20)
-    labelContactos=Label(ventana2,text='Digite la cantidad de contactos a realizar de forma automática ', bg='Teal', font=('arial',15))  
-    labelContactos.place(x=50,y=120)
-    entryCantContactos=Entry(ventana2)
-    entryCantContactos.place(x=420,y=200)
+    labelNombre=Label(ventana2,text='Nombre: ', bg='Teal', font=('arial',15))  
+    labelNombre.place(x=50,y=120)
+    entryNombre=Entry(ventana2)
+    entryNombre.place(x=150,y=120)
+    labelApellidos=Label(ventana2,text='Apellidos: ',bg='Teal',font=('arial',15))
+    labelApellidos.place(x=50,y=160)
+    entryApellidos=Entry(ventana2)
+    entryApellidos.place(x=150,y=160)
+    labelTipo=Label(ventana2,text='Tipo: ',bg='Teal',font=('arial',15))
+    labelTipo.place(x=50,y=200)
+    comboTipo=ttk.Combobox(ventana2,values=['Celular','Laboral','Particular','Fax'])
+    comboTipo.place(x=150,y=200)
+    comboTipo.config(state="readonly")
+    labelNumero=Label(ventana2,text='Número: ',bg='Teal',font=('arial',15))
+    labelNumero.place(x=50,y=240)
+    entryNumero=Entry(ventana2)
+    entryNumero.place(x=150,y=240)
+    labelCorreo=Label(ventana2,text='Correo: ',bg='Teal',font=('arial',15))
+    labelCorreo.place(x=50,y=280)
+    entryCorreo=Entry(ventana2)
+    entryCorreo.place(x=300,y=280)
+    comboCorreo=ttk.Combobox(ventana2,values=['Particular','Laboral'])
+    comboCorreo.place(x=150,y=280)
+    comboCorreo.config(state="readonly")
+    def limpiar():
+        entryNombre.delete(0,END)
+        entryApellidos.delete(0,END)
+        entryNumero.delete(0,END)
+        entryCorreo.delete(0,END)
+    def ingresar():
+        print(comboTipo.get())
+    botonLimpiar=Button(ventana2,text='Limpiar',width=18,height=2,command=limpiar)
+    botonLimpiar.place(x=60,y=350)    
+    botonAceptar=Button(ventana2,text='Aceptar',width=18,height=2,command=ingresar)
+    botonAceptar.place(x=200,y=350)
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
-boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2)
+boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
 boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2)
 boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2)
 boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2)
