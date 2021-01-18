@@ -67,6 +67,11 @@ def boton1Funcion():
     entryCantContactos=Entry(ventana1)
     entryCantContactos.place(x=420,y=200)
     def aceptar1():
+        '''
+        Funcionamiento: Crea la base de datos
+        Entradas: NA
+        Salidas: NA
+        '''
         global listaContactos
         contacto1=None
         try:
@@ -141,22 +146,39 @@ def boton2Funcion():
     entryNumero.place(x=150,y=240)
     labelCorreo=Label(ventana2,text='Correo: ',bg='Teal',font=('arial',15))
     labelCorreo.place(x=50,y=280)
-    entryCorreo=Entry(ventana2)
-    entryCorreo.place(x=300,y=280)
-    comboCorreo=ttk.Combobox(ventana2,values=['Particular','Laboral'])
-    comboCorreo.place(x=150,y=280)
-    comboCorreo.config(state="readonly")
+    entryCorreo1=Entry(ventana2)
+    entryCorreo1.place(x=300,y=280)
+    comboCorreo1=ttk.Combobox(ventana2,values=['Particular','Laboral'])
+    comboCorreo1.place(x=150,y=280)
+    comboCorreo1.config(state="readonly")
+    entryCorreo2=Entry(ventana2)
+    entryCorreo2.place(x=300,y=320)
+    comboCorreo2=ttk.Combobox(ventana2,values=['Particular','Laboral'])
+    comboCorreo2.place(x=150,y=320)
+    comboCorreo2.config(state="readonly")
+    entryCorreo3=Entry(ventana2)
+    entryCorreo3.place(x=300,y=360)
+    comboCorreo3=ttk.Combobox(ventana2,values=['Particular','Laboral'])
+    comboCorreo3.place(x=150,y=360)
+    comboCorreo3.config(state="readonly")
     def limpiar():
         entryNombre.delete(0,END)
         entryApellidos.delete(0,END)
         entryNumero.delete(0,END)
-        entryCorreo.delete(0,END)
+        entryCorreo1.delete(0,END)
+        entryCorreo2.delete(0,END)
+        entryCorreo3.delete(0,END)
     def ingresar():
-        print(comboTipo.get())
+        global listaContactos
+        anombre=entryNombre.get()
+        nuevoContacto=Contacto(anombre)
+        aapellidos=entryApellidos.get()
+        nuevoContacto.setApellidos(aapellidos)
+
     botonLimpiar=Button(ventana2,text='Limpiar',width=18,height=2,command=limpiar)
-    botonLimpiar.place(x=60,y=350)    
+    botonLimpiar.place(x=60,y=420)    
     botonAceptar=Button(ventana2,text='Aceptar',width=18,height=2,command=ingresar)
-    botonAceptar.place(x=200,y=350)
+    botonAceptar.place(x=200,y=420)
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
