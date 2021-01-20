@@ -154,21 +154,16 @@ def boton2Funcion():
     comboCorreo1.config(state="readonly")
     entryCorreo2=Entry(ventana2)
     entryCorreo2.place(x=360,y=320)
-    entryCorreo2.config(state='disabled')
+    entryCorreo2.config(state='readonly')
     comboCorreo2=ttk.Combobox(ventana2,values=['Particular','Laboral'])
     comboCorreo2.place(x=210,y=320)
-    comboCorreo2.config(state="disabled")
+    comboCorreo2.config(state="readonly")
     entryCorreo3=Entry(ventana2)
     entryCorreo3.place(x=360,y=360)
-    entryCorreo3.config(state='disabled')
+    entryCorreo3.config(state='readonly')
     comboCorreo3=ttk.Combobox(ventana2,values=['Particular','Laboral'])
-    comboCorreo3.place(x=210,y=360)
-    comboCorreo3.config(state="disabled")
-    if comboCorreo1.get()!='' and entryCorreo1.get()!='':
-        comboCorreo2.config(state="readonly")
-        entryCorreo2.config(state="normal")    
+    comboCorreo3.place(x=210,y=360)  
     def limpiar():
-        print(comboTipo.get()=='')
         entryNombre.delete(0,END)
         entryApellidos.delete(0,END)
         entryNumero.delete(0,END)
@@ -184,6 +179,7 @@ def boton2Funcion():
         correo1=0
         correo2=0
         correo3=0
+        aapellidos=''
         acorreos=[]
         if comboTipo.get()=='':
             ventanaError=Tk()
@@ -212,7 +208,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if comboCorreo1=='' and entryCorreo1!='':
+        if comboCorreo1.get()=='' and entryCorreo1.get()!='':
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -221,7 +217,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if comboCorreo1!='' and entryCorreo1=='':
+        if comboCorreo1.get()!='' and entryCorreo1.get()=='':
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -230,7 +226,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if comboCorreo2=='' and entryCorreo2!='':
+        if comboCorreo2.get()=='' and entryCorreo2.get()!='':
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -239,7 +235,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if comboCorreo2!='' and entryCorreo2=='':
+        if comboCorreo2.get()!='' and entryCorreo2.get()=='':
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -248,7 +244,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if comboCorreo3=='' and entryCorreo3!='':
+        if comboCorreo3.get()=='' and entryCorreo3.get()!='':
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -257,7 +253,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if comboCorreo3!='' and entryCorreo3=='':
+        if comboCorreo3.get()!='' and entryCorreo3.get()=='':
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -266,7 +262,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if entryCorreo1!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo1.get()):
+        if entryCorreo1.get()!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo1.get()):
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -275,7 +271,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if entryCorreo2!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo2.get()):
+        if entryCorreo2.get()!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo2.get()):
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -284,7 +280,7 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
-        if entryCorreo3!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo3.get()):
+        if entryCorreo3.get()!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo3.get()):
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -301,18 +297,18 @@ def boton2Funcion():
             atipo=3
         if comboTipo.get()=='Fax':
             atipo=4
-        if comboCorreo1!=''and entryCorreo1!='':
-            if comboCorreo1=='Particular':
+        if comboCorreo1.get()!=''and entryCorreo1.get()!='':
+            if comboCorreo1.get()=='Particular':
                 correo1=(1,entryCorreo1.get())
             else:
                 correo1=(2,entryCorreo1.get())
-        if comboCorreo2!=''and entryCorreo2!='':
-            if comboCorreo2=='Particular':
+        if comboCorreo2.get()!=''and entryCorreo2.get()!='':
+            if comboCorreo2.get()=='Particular':
                 correo2=(1,entryCorreo2.get())
             else:
                 correo2=(2,entryCorreo2.get())
-        if comboCorreo3!=''and entryCorreo3!='':
-            if comboCorreo3=='Particular':
+        if comboCorreo3.get()!=''and entryCorreo3.get()!='':
+            if comboCorreo3.get()=='Particular':
                 correo3=(1,entryCorreo3.get())
             else:
                 correo3=(2,entryCorreo3.get())
@@ -324,22 +320,52 @@ def boton2Funcion():
             acorreos+=[correo3]
         anombre=entryNombre.get()
         nuevoContacto=Contacto(anombre)
-        aapellidos=entryApellido1.get()+'-'+entryApellido2.get()
+        for i in entryApellidos.get():
+            if i==' ':
+               aapellidos+='-'
+            else:
+                aapellidos+=i
         nuevoContacto.setApellidos(aapellidos)
         nuevoContacto.setTipo(atipo)
         nuevoContacto.setNumero(int(entryNumero.get()))
         nuevoContacto.setCorreo(acorreos)
         listaContactos+=[nuevoContacto]
-
-
+        print (listaContactos)
+        for i in listaContactos:
+            print(i.nombre)
+            print(i.apellidos)
+            print(i.tipo)
+            print(i.numero)
+            print(i.correo)
+            print()
     botonLimpiar=Button(ventana2,text='Limpiar',width=18,height=2,command=limpiar)
     botonLimpiar.place(x=60,y=440)    
     botonAceptar=Button(ventana2,text='Aceptar',width=18,height=2,command=ingresar)
     botonAceptar.place(x=200,y=440)
+def modEli():
+    ventana3=Tk()
+    ventana3.title('Modificar/Eliminar')
+    ventana3.geometry('800x300')
+    ventana3.resizable(FALSE,FALSE)
+    labelTitulo1 = Label(ventana3, text = "Modificar/Eliminar contactos" , bg="Teal", fg="Azure", font = ('calibri', 40))
+    labelTitulo.place(x=20,y=30)
+    ventana3.configure(bg='Teal')
+    labelTitulo1.place(x=40, y=20)
+    radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola')
+    radioApellidos=Radiobutton(ventana3,text='Apellidos',value='Hola2')
+    #radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola')
+    #radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola')
+    radioNombre.place(x=20,y=100)
+    radioApellidos.place(x=20,y=130)
+    entryDato=Entry(ventana3)
+    entryDato.place(x=420,y=200)
+    botonAceptar=Button(ventana3,text='Aceptar',width=18,height=2,command=lambda:print(radioNombre.value))
+    botonAceptar.place(x=50,y=40)
+
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
-boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2)
+boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2,command=modEli)
 boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2)
 boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2)
 boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2)
