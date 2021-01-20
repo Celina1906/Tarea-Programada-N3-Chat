@@ -7,6 +7,7 @@ from tkinter import *
 import names
 import random
 from tkinter import ttk
+import re
 #Clase Contacto
 class Contacto:
     nombre=''
@@ -130,55 +131,211 @@ def boton2Funcion():
     labelNombre=Label(ventana2,text='Nombre: ', bg='Teal', font=('arial',15))  
     labelNombre.place(x=50,y=120)
     entryNombre=Entry(ventana2)
-    entryNombre.place(x=150,y=120)
+    entryNombre.place(x=210,y=120)
     labelApellidos=Label(ventana2,text='Apellidos: ',bg='Teal',font=('arial',15))
     labelApellidos.place(x=50,y=160)
     entryApellidos=Entry(ventana2)
-    entryApellidos.place(x=150,y=160)
+    entryApellidos.place(x=210,y=160)
     labelTipo=Label(ventana2,text='Tipo: ',bg='Teal',font=('arial',15))
     labelTipo.place(x=50,y=200)
     comboTipo=ttk.Combobox(ventana2,values=['Celular','Laboral','Particular','Fax'])
-    comboTipo.place(x=150,y=200)
+    comboTipo.place(x=210,y=200)
     comboTipo.config(state="readonly")
     labelNumero=Label(ventana2,text='Número: ',bg='Teal',font=('arial',15))
     labelNumero.place(x=50,y=240)
     entryNumero=Entry(ventana2)
-    entryNumero.place(x=150,y=240)
+    entryNumero.place(x=210,y=240)
     labelCorreo=Label(ventana2,text='Correo: ',bg='Teal',font=('arial',15))
     labelCorreo.place(x=50,y=280)
     entryCorreo1=Entry(ventana2)
-    entryCorreo1.place(x=300,y=280)
+    entryCorreo1.place(x=360,y=280)
     comboCorreo1=ttk.Combobox(ventana2,values=['Particular','Laboral'])
-    comboCorreo1.place(x=150,y=280)
+    comboCorreo1.place(x=210,y=280)
     comboCorreo1.config(state="readonly")
     entryCorreo2=Entry(ventana2)
-    entryCorreo2.place(x=300,y=320)
+    entryCorreo2.place(x=360,y=320)
+    entryCorreo2.config(state='disabled')
     comboCorreo2=ttk.Combobox(ventana2,values=['Particular','Laboral'])
-    comboCorreo2.place(x=150,y=320)
-    comboCorreo2.config(state="readonly")
+    comboCorreo2.place(x=210,y=320)
+    comboCorreo2.config(state="disabled")
     entryCorreo3=Entry(ventana2)
-    entryCorreo3.place(x=300,y=360)
+    entryCorreo3.place(x=360,y=360)
+    entryCorreo3.config(state='disabled')
     comboCorreo3=ttk.Combobox(ventana2,values=['Particular','Laboral'])
-    comboCorreo3.place(x=150,y=360)
-    comboCorreo3.config(state="readonly")
+    comboCorreo3.place(x=210,y=360)
+    comboCorreo3.config(state="disabled")
+    if comboCorreo1.get()!='' and entryCorreo1.get()!='':
+        comboCorreo2.config(state="readonly")
+        entryCorreo2.config(state="normal")    
     def limpiar():
+        print(comboTipo.get()=='')
         entryNombre.delete(0,END)
         entryApellidos.delete(0,END)
         entryNumero.delete(0,END)
         entryCorreo1.delete(0,END)
         entryCorreo2.delete(0,END)
         entryCorreo3.delete(0,END)
+        comboTipo.set('')
+        comboCorreo1.set('')
+        comboCorreo2.set('')
+        comboCorreo3.set('')
     def ingresar():
         global listaContactos
+        correo1=0
+        correo2=0
+        correo3=0
+        acorreos=[]
+        if comboTipo.get()=='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El tipo no puede ser vacío ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if not re.match("^\d{8}$",entryNumero.get()):
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El formato del número no es válido ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if comboTipo.get()=='Celular' and entryNumero.get()[0]!='6'and entryNumero.get()[0]!='7'and entryNumero.get()[0]!='8'and entryNumero.get()[0]!='9':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El formato del número celular no es válido ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if comboCorreo1=='' and entryCorreo1!='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: Debe seleccionar el tipo de correo ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if comboCorreo1!='' and entryCorreo1=='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El correo no puede ser vacío ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if comboCorreo2=='' and entryCorreo2!='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: Debe seleccionar el tipo de correo ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if comboCorreo2!='' and entryCorreo2=='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El correo no puede ser vacío ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if comboCorreo3=='' and entryCorreo3!='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: Debe seleccionar el tipo de correo ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if comboCorreo3!='' and entryCorreo3=='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El correo no puede ser vacío ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if entryCorreo1!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo1.get()):
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El formato del correo no es válido ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if entryCorreo2!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo2.get()):
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El formato del correo no es válido ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if entryCorreo3!='' and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo3.get()):
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El formato del correo no es válido ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop()
+        if comboTipo.get()=='Celular':
+            atipo=1
+        if comboTipo.get()=='Laboral':
+            atipo=2
+        if comboTipo.get()=='Particular':
+            atipo=3
+        if comboTipo.get()=='Fax':
+            atipo=4
+        if comboCorreo1!=''and entryCorreo1!='':
+            if comboCorreo1=='Particular':
+                correo1=(1,entryCorreo1.get())
+            else:
+                correo1=(2,entryCorreo1.get())
+        if comboCorreo2!=''and entryCorreo2!='':
+            if comboCorreo2=='Particular':
+                correo2=(1,entryCorreo2.get())
+            else:
+                correo2=(2,entryCorreo2.get())
+        if comboCorreo3!=''and entryCorreo3!='':
+            if comboCorreo3=='Particular':
+                correo3=(1,entryCorreo3.get())
+            else:
+                correo3=(2,entryCorreo3.get())
+        if correo1!=0:
+            acorreos+=[correo1]
+        if correo2!=0:
+            acorreos+=[correo2]
+        if correo3!=0:
+            acorreos+=[correo3]
         anombre=entryNombre.get()
         nuevoContacto=Contacto(anombre)
-        aapellidos=entryApellidos.get()
+        aapellidos=entryApellido1.get()+'-'+entryApellido2.get()
         nuevoContacto.setApellidos(aapellidos)
+        nuevoContacto.setTipo(atipo)
+        nuevoContacto.setNumero(int(entryNumero.get()))
+        nuevoContacto.setCorreo(acorreos)
+        listaContactos+=[nuevoContacto]
+
 
     botonLimpiar=Button(ventana2,text='Limpiar',width=18,height=2,command=limpiar)
-    botonLimpiar.place(x=60,y=420)    
+    botonLimpiar.place(x=60,y=440)    
     botonAceptar=Button(ventana2,text='Aceptar',width=18,height=2,command=ingresar)
-    botonAceptar.place(x=200,y=420)
+    botonAceptar.place(x=200,y=440)
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
