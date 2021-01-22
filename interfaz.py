@@ -154,13 +154,11 @@ def boton2Funcion():
     comboCorreo1.config(state="readonly")
     entryCorreo2=Entry(ventana2)
     entryCorreo2.place(x=360,y=320)
-    entryCorreo2.config(state='readonly')
     comboCorreo2=ttk.Combobox(ventana2,values=['Particular','Laboral'])
     comboCorreo2.place(x=210,y=320)
     comboCorreo2.config(state="readonly")
     entryCorreo3=Entry(ventana2)
     entryCorreo3.place(x=360,y=360)
-    entryCorreo3.config(state='readonly')
     comboCorreo3=ttk.Combobox(ventana2,values=['Particular','Laboral'])
     comboCorreo3.place(x=210,y=360)  
     def limpiar():
