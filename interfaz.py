@@ -328,6 +328,14 @@ def boton2Funcion():
         nuevoContacto.setNumero(int(entryNumero.get()))
         nuevoContacto.setCorreo(acorreos)
         listaContactos+=[nuevoContacto]
+        ventanaCambio=Tk()
+        ventanaCambio.title('Contacto Ingresado')
+        ventanaCambio.geometry('600x300')
+        ventanaCambio.resizable(FALSE,FALSE)
+        labelCambio=Label(ventanaCambio,text='Contacto ingresado con éxito ', bg='Teal', font=('arial',20))
+        labelCambio.place(x=50,y=150)
+        ventanaCambio.configure(bg='Teal')
+        ventanaCambio.mainloop()
         print (listaContactos)
         for i in listaContactos:
             print(i.nombre)
