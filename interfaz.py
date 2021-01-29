@@ -383,10 +383,8 @@ def boton2Funcion():
     botonLimpiar.place(x=60,y=440)    
     botonAceptar=Button(ventana2,text='Aceptar',width=18,height=2,command=ingresar)
     botonAceptar.place(x=200,y=440)
+
 def modEli():
-    def prueba():
-        s=selec.get()
-        print(s)
     ventana3=Tk()
     ventana3.title('Modificar/Eliminar')
     ventana3.geometry('800x300')
@@ -395,16 +393,10 @@ def modEli():
     labelTitulo.place(x=20,y=30)
     ventana3.configure(bg='Teal')
     labelTitulo1.place(x=40, y=20)
-    selec=IntVar()      
-    radioNombre=Radiobutton(ventana3,text='Nombre',value=1,variable=selec,command=prueba)
-    radioApellidos=Radiobutton(ventana3,text='Apellidos',value=2,variable=selec,command=prueba)
-    #radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola')
-    #radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola')
-    radioNombre.place(x=20,y=100)
-    radioApellidos.place(x=20,y=130)
-    
     entryDato=Entry(ventana3)
     entryDato.place(x=270,y=150)
+    
+   
     botonAceptar=Button(ventana3,text='Aceptar',width=18,height=2)
     botonAceptar.place(x=370,y=250)
 
