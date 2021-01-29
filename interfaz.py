@@ -4,6 +4,7 @@
 #Versión: 3.9.0
 #Importaciones
 from tkinter import *
+from archivos import *
 import names
 import random
 from tkinter import ttk
@@ -39,6 +40,7 @@ class Contacto:
         return self.correo
 #Variables globales
 listaContactos=[]
+nomArchivo='contactos'
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Chat')
@@ -77,37 +79,54 @@ def boton1Funcion():
         contacto1=None
         try:
             numContactos=int(entryCantContactos.get())
-            while numContactos!=0:
-                acorreo=[]
-                anombre=names.get_first_name()
-                contacto1=Contacto(anombre)
-                aapellidos=names.get_last_name()+'-'+names.get_last_name()
-                contacto1.setApellidos(aapellidos)
-                tipo=[1,2,3,4]
-                atipo=random.choice(tipo)
-                contacto1.setTipo(atipo)
-                if atipo==1:
-                    anumero=random.randint(60000000,99999999)
-                else:
-                    anumero=random.randint(10000000,99999999)
-                contacto1.setNumero(anumero)
-                cantCorreos=[0,1,2,3]
-                cantCorreos=random.choice(cantCorreos)
-                while cantCorreos!=0:
-                    tipoCorreo=[1,2]
-                    acorreo+=[(random.choice(tipoCorreo),anombre.lower()+str(cantCorreos)+'@gmail.com')]
-                    cantCorreos-=1
-                contacto1.setCorreo(acorreo)
-                listaContactos+=[contacto1]
-                numContactos-=1
-            ventanaCambio=Tk()
-            ventanaCambio.title('Base de datos creada')
-            ventanaCambio.geometry('600x300')
-            ventanaCambio.resizable(FALSE,FALSE)
-            labelCambio=Label(ventanaCambio,text='Base de datos creada con éxito ', bg='Teal', font=('arial',20))
-            labelCambio.place(x=50,y=150)
-            ventanaCambio.configure(bg='Teal')
-            ventanaCambio.mainloop()
+            if numContactos<0 or numContactos>500:
+                ventanaError=Tk()
+                ventanaError.title('ERROR')
+                ventanaError.geometry('750x200')
+                ventanaError.resizable(FALSE,FALSE)
+                labelError=Label(ventanaError,text='ERROR: Debe digitar un número mayor a 0 y menor a 500 ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+                labelError.place(x=10,y=100)
+                ventanaError.configure(bg='Tomato')
+                ventanaError.mainloop()
+            else:
+                while numContactos!=0:
+                    acorreo=[]
+                    anombre=names.get_first_name()
+                    contacto1=Contacto(anombre)
+                    aapellidos=names.get_last_name()+'-'+names.get_last_name()
+                    contacto1.setApellidos(aapellidos)
+                    tipo=[1,2,3,4]
+                    atipo=random.choice(tipo)
+                    contacto1.setTipo(atipo)
+                    if atipo==1:
+                        anumero=random.randint(60000000,99999999)
+                    else:
+                        anumero=random.randint(10000000,99999999)
+                    for i in listaContactos:
+                        while i.numero==anumero:
+                            if atipo==1:
+                                anumero=random.randint(60000000,99999999)
+                            else:
+                                anumero=random.randint(10000000,99999999)
+                    contacto1.setNumero(anumero)
+                    cantCorreos=[0,1,2,3]
+                    cantCorreos=random.choice(cantCorreos)
+                    while cantCorreos!=0:
+                        tipoCorreo=[1,2]
+                        acorreo+=[(random.choice(tipoCorreo),anombre.lower()+str(cantCorreos)+'@gmail.com')]
+                        cantCorreos-=1
+                    contacto1.setCorreo(acorreo)
+                    listaContactos+=[contacto1]
+                    numContactos-=1
+                graba(nomArchivo,listaContactos)
+                ventanaCambio=Tk()
+                ventanaCambio.title('Base de datos creada')
+                ventanaCambio.geometry('600x300')
+                ventanaCambio.resizable(FALSE,FALSE)
+                labelCambio=Label(ventanaCambio,text='Base de datos creada con éxito ', bg='Teal', font=('arial',20))
+                labelCambio.place(x=50,y=150)
+                ventanaCambio.configure(bg='Teal')
+                ventanaCambio.mainloop()      
         except:
             ventanaError=Tk()
             ventanaError.title('ERROR')
@@ -117,8 +136,12 @@ def boton1Funcion():
             labelError.place(x=50,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
+    def limpiar():
+        entryCantContactos.delete(0,END)
     botonAceptar=Button(ventana1,text='Aceptar',width=18,height=2,command=aceptar1)
-    botonAceptar.place(x=420,y=250)
+    botonAceptar.place(x=300,y=250)
+    botonLimpiar=Button(ventana1,text='Limpiar',width=18,height=2,command=limpiar)
+    botonLimpiar.place(x=460,y=250)
 def boton2Funcion():
     ventana2=Tk()
     ventana2.title('Insertar contacto')
@@ -206,6 +229,16 @@ def boton2Funcion():
             labelError.place(x=10,y=100)
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
+        for i in listaContactos:
+            if i.numero==int(entryNumero.get()):
+                ventanaError=Tk()
+                ventanaError.title('ERROR')
+                ventanaError.geometry('750x200')
+                ventanaError.resizable(FALSE,FALSE)
+                labelError=Label(ventanaError,text='ERROR: Número repetido ', bg='Tomato',fg='AliceBlue', font=('arial',20))
+                labelError.place(x=10,y=100)
+                ventanaError.configure(bg='Tomato')
+                ventanaError.mainloop()
         if comboCorreo1.get()=='' and entryCorreo1.get()!='':
             ventanaError=Tk()
             ventanaError.title('ERROR')
@@ -328,6 +361,15 @@ def boton2Funcion():
         nuevoContacto.setNumero(int(entryNumero.get()))
         nuevoContacto.setCorreo(acorreos)
         listaContactos+=[nuevoContacto]
+        graba(nomArchivo,listaContactos)
+        ventanaCambio=Tk()
+        ventanaCambio.title('Contacto Ingresado')
+        ventanaCambio.geometry('600x300')
+        ventanaCambio.resizable(FALSE,FALSE)
+        labelCambio=Label(ventanaCambio,text='Contacto ingresado con éxito ', bg='Teal', font=('arial',20))
+        labelCambio.place(x=50,y=150)
+        ventanaCambio.configure(bg='Teal')
+        ventanaCambio.mainloop()
         print (listaContactos)
         for i in listaContactos:
             print(i.nombre)
