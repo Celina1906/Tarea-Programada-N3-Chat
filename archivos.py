@@ -31,3 +31,27 @@ def lee (nomArchLeer):
     except:
         print("Error al leer el archivo: ", nomArchLeer)
     return contactos
+
+def grabarXml(nomArchGrabar,lista):
+    """
+    Funcion:Guarda el archivo 
+    Entrada:El nombre del archivo y la lista con los elementos
+    Salida:nada o un mensaje de error
+    """
+    nomArchGrabar+=".xml"
+    #try:
+    f=open(nomArchGrabar,"w",encoding="utf-8")
+    f.writelines("<contactos>\n")
+    try:
+        for i in lista:
+            f.writelines("\t<nombre>"+i.nombre+"</nombre>\n")
+            f.writelines("\t\t<apellidos>"+i.apellidos+"</apellidos>\n")
+            f.writelines("\t\t<tipo>"+i.tipo+"</tipo>\n")
+            f.writelines("\t\t<numero>"+i.numero+"</numero>\n")
+            f.writelines("\t\t<correo>"+i.correo+"</correo>\n")
+        f.writelines("</Contactos>\n")
+        f.close()
+        print("¡Archivo xml creado correctamente!")
+        return ""
+    except:
+        print("Ha ocurrido un error al crear el archivo xml.")
