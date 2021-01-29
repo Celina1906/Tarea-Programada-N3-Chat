@@ -9,6 +9,7 @@ import names
 import random
 from tkinter import ttk
 import re
+#import tkinter as tk
 #Clase Contacto
 class Contacto:
     nombre=''
@@ -382,6 +383,7 @@ def boton2Funcion():
     botonLimpiar.place(x=60,y=440)    
     botonAceptar=Button(ventana2,text='Aceptar',width=18,height=2,command=ingresar)
     botonAceptar.place(x=200,y=440)
+
 def modEli():
     ventana3=Tk()
     ventana3.title('Modificar/Eliminar')
@@ -391,16 +393,12 @@ def modEli():
     labelTitulo.place(x=20,y=30)
     ventana3.configure(bg='Teal')
     labelTitulo1.place(x=40, y=20)
-    radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola')
-    radioApellidos=Radiobutton(ventana3,text='Apellidos',value='Hola2')
-    #radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola')
-    #radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola')
-    radioNombre.place(x=20,y=100)
-    radioApellidos.place(x=20,y=130)
     entryDato=Entry(ventana3)
-    entryDato.place(x=420,y=200)
-    botonAceptar=Button(ventana3,text='Aceptar',width=18,height=2,command=lambda:print(radioNombre.value))
-    botonAceptar.place(x=50,y=40)
+    entryDato.place(x=270,y=150)
+    
+   
+    botonAceptar=Button(ventana3,text='Aceptar',width=18,height=2)
+    botonAceptar.place(x=370,y=250)
 
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
