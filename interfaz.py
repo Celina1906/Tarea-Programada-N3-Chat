@@ -395,8 +395,7 @@ def modEli():
     labelTitulo1.place(x=40, y=20)
     entryDato=Entry(ventana3)
     entryDato.place(x=270,y=150)
-    
-   
+    #radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola',variable=selec).place(x=100,y=100)
     botonAceptar=Button(ventana3,text='Aceptar',width=18,height=2)
     botonAceptar.place(x=370,y=250)
 
@@ -425,3 +424,5 @@ boton9.place(x=600,y=200)
 boton10.place(x=300,y=280)
 boton11.place(x=450,y=280)
 ventanaPrincipal.mainloop()
+
+

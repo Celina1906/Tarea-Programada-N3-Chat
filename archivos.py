@@ -46,9 +46,9 @@ def grabarXml(nomArchGrabar,lista):
         for i in lista:
             f.writelines("\t<nombre>"+i.nombre+"</nombre>\n")
             f.writelines("\t\t<apellidos>"+i.apellidos+"</apellidos>\n")
-            f.writelines("\t\t<tipo>"+i.tipo+"</tipo>\n")
-            f.writelines("\t\t<numero>"+i.numero+"</numero>\n")
-            f.writelines("\t\t<correo>"+i.correo+"</correo>\n")
+            f.writelines("\t\t<tipo>"+str(i.tipo)+"</tipo>\n")
+            f.writelines("\t\t<numero>"+str(i.numero)+"</numero>\n")
+            f.writelines("\t\t<correo>"+str(i.correo)+"</correo>\n")
         f.writelines("</Contactos>\n")
         f.close()
         print("¡Archivo xml creado correctamente!")
