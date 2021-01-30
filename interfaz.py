@@ -384,8 +384,14 @@ def boton2Funcion():
     botonAceptar=Button(ventana2,text='Aceptar',width=18,height=2,command=ingresar)
     botonAceptar.place(x=200,y=440)
 
+def modificar():
+    global listaContactos
+    ventana=Tk()
+def eliminar():
+    global listaContactos
+
 def modEli():
-    ventana3=Tk()
+    ventana3=Toplevel()
     ventana3.title('Modificar/Eliminar')
     ventana3.geometry('800x300')
     ventana3.resizable(FALSE,FALSE)
@@ -395,16 +401,85 @@ def modEli():
     labelTitulo1.place(x=40, y=20)
     entryDato=Entry(ventana3)
     entryDato.place(x=270,y=150)
-    #radioNombre=Radiobutton(ventana3,text='Nombre',value='Hola',variable=selec).place(x=100,y=100)
-    botonAceptar=Button(ventana3,text='Aceptar',width=18,height=2)
+    valor = IntVar()
+    def aceptar():
+        global listaContactos
+        nuevaLista=[]
+        x=valor.get()
+        if x==0 or entryDato.get()=='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('750x200')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: Debe llenar los espacios vacíos', bg='Tomato',fg='AliceBlue', font=('arial',20))
+            labelError.place(x=10,y=100)
+            ventanaError.configure(bg='Tomato')
+            ventanaError.mainloop() 
+        if x==1:
+            for contac in listaContactos:
+                if entryDato.get() in contac.nombre:
+                    nuevaLista+=[contac]
+        if x==2: 
+            for contac in listaContactos:
+                if entryDato.get() in contac.apellidos:
+                    nuevaLista+=[contac]
+        if x==3:
+            bandera=0
+            try: 
+                bandera=1
+                int(entryDato.get())
+            except:
+                ventanaError=Tk()
+                ventanaError.title('ERROR')
+                ventanaError.geometry('750x200')
+                ventanaError.resizable(FALSE,FALSE)
+                labelError=Label(ventanaError,text='ERROR: Dato digitado no válido', bg='Tomato',fg='AliceBlue', font=('arial',20))
+                labelError.place(x=10,y=100)
+                ventanaError.configure(bg='Tomato')
+                ventanaError.mainloop() 
+            if bandera==1:
+                for contac in listaContactos:
+                    if entryDato.get() in str(contac.numero):
+                        nuevaLista+=[contac]
+        
+                
+    radioNombre = Radiobutton(ventana3, text = "Nombre", value = 1, variable = valor)
+    radioNombre.place(x = 50, y = 90)
+    radioApellidos = Radiobutton(ventana3, text = "Apellidos", value = 2, variable = valor)
+    radioApellidos.place(x = 50, y = 120)
+    radioNumero = Radiobutton(ventana3, text = "Número", value = 3, variable = valor)
+    radioNumero.place(x = 50, y = 150)
+    botonAceptar=Button(ventana3,text='Aceptar',width=18,height=2,command=aceptar)
     botonAceptar.place(x=370,y=250)
+
+def boton5Funcion():
+    try:
+        grabarXml('contactosXML',listaContactos)
+        ventanaCambio=Tk()
+        ventanaCambio.title('Archivo generado')
+        ventanaCambio.geometry('600x300')
+        ventanaCambio.resizable(FALSE,FALSE)
+        labelCambio=Label(ventanaCambio,text='Archivo generado con éxito ', bg='Teal', font=('arial',20))
+        labelCambio.place(x=50,y=150)
+        ventanaCambio.configure(bg='Teal')
+        ventanaCambio.mainloop()
+    except:
+        ventanaError=Tk()
+        ventanaError.title('ERROR')
+        ventanaError.geometry('750x200')
+        ventanaError.resizable(FALSE,FALSE)
+        labelError=Label(ventanaError,text='ERROR: Ha ocurrido un error al generar el archivo', bg='Tomato',fg='AliceBlue', font=('arial',20))
+        labelError.place(x=10,y=100)
+        ventanaError.configure(bg='Tomato')
+        ventanaError.mainloop() 
+
 
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
 boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2,command=modEli)
 boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2)
-boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2)
+boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2,command=boton5Funcion)
 boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2)
 boton7=Button(ventanaPrincipal,text='7. Chatear',width=25,height=2)
 boton8=Button(ventanaPrincipal,text='8. Reportes',width=13,height=2)
