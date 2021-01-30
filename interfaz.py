@@ -43,6 +43,7 @@ class Contacto:
 listaContactos=[]
 nomArchivo='contactos'
 listaFrases=[]
+ultimo=5
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Chat')
@@ -755,7 +756,58 @@ def modEli():
             entryCantidad.config(state='readonly')
             entryCantidad.place(x=600,y=20)
             tabla=ttk.Treeview(ventana3)
+            tabla['columns']=('Número','Nombre','Apellidos')
+            tabla.column('#0',width=0,minwidth=0)
+            tabla.column('Número',width=120,minwidth=25)
+            tabla.column('Nombre',anchor=CENTER,width=120) 
+            tabla.column('Apellidos',anchor=W,width=120)
+            tabla.heading('#0',text='',anchor=W)
+            tabla.heading('Número',text='Número',anchor=W)
+            tabla.heading('Nombre',text='Nombre',anchor=CENTER)      
+            tabla.heading('Apellidos',text='Apellidos',anchor=W)
+            id=0 
+            for con in nuevaLista[0:5]:
+                tabla.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
+                id+=1
                 
+            def flechaA():
+                global ultimo
+                try:
+                    tabla2=ttk.Treeview(ventana3)
+                    tabla2['columns']=('Número','Nombre','Apellidos')
+                    tabla2.column('#0',width=0,minwidth=0)
+                    tabla2.column('Número',width=120,minwidth=25)
+                    tabla2.column('Nombre',anchor=CENTER,width=120) 
+                    tabla2.column('Apellidos',anchor=W,width=120)
+                    tabla2.heading('#0',text='',anchor=W)
+                    tabla2.heading('Número',text='Número',anchor=W)
+                    tabla2.heading('Nombre',text='Nombre',anchor=CENTER)      
+                    tabla2.heading('Apellidos',text='Apellidos',anchor=W)
+                    id=0
+                    for con in nuevaLista[ultimo:ultimo+5]:
+                        tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
+                        id+=1
+                        ultimo+=5
+                    tabla2.place(x=100,y=200)
+                except:
+                    tabla3=ttk.Treeview(ventana3)
+                    tabla3['columns']=('Número','Nombre','Apellidos')
+                    tabla3.column('#0',width=0,minwidth=0)
+                    tabla3.column('Número',width=120,minwidth=25)
+                    tabla3.column('Nombre',anchor=CENTER,width=120) 
+                    tabla3.column('Apellidos',anchor=W,width=120)
+                    tabla3.heading('#0',text='',anchor=W)
+                    tabla3.heading('Número',text='Número',anchor=W)
+                    tabla3.heading('Nombre',text='Nombre',anchor=CENTER)      
+                    tabla3.heading('Apellidos',text='Apellidos',anchor=W)
+                    id=0
+                    for con in nuevaLista[ultimo:len(nuevaLista)]:
+                        tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
+                        id+=1
+                    tabla3.place(x=100,y=200)
+            flechaAboton=Button(ventana3,text='--->',width=18,height=2,command=flechaA)
+            flechaAboton.place(x=100,y=400)
+            tabla.place(x=100,y=200)
     radioNombre = Radiobutton(ventana3, text = "Nombre", value = 1, variable = valor)
     radioNombre.place(x = 50, y = 90)
     radioApellidos = Radiobutton(ventana3, text = "Apellidos", value = 2, variable = valor)
