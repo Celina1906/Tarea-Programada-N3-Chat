@@ -685,6 +685,7 @@ def eliminar():
             ventanaCambio.mainloop()
     botonAceptar=Button(ventanaMod,text='Aceptar',width=18,height=2,command=buscarNumero)
     botonAceptar.place(x=200,y=200)
+    ventanaMod.mainloop()
    
 def modEli():
     ventana3=Toplevel()
@@ -700,9 +701,11 @@ def modEli():
     valor = IntVar()
     def aceptar():
         global listaContactos
+        bandera=0
         nuevaLista=[]
         x=valor.get()
         if x==0 or entryDato.get()=='':
+            bandera=1
             ventanaError=Tk()
             ventanaError.title('ERROR')
             ventanaError.geometry('750x200')
@@ -720,9 +723,9 @@ def modEli():
                 if entryDato.get() in contac.apellidos:
                     nuevaLista+=[contac]
         elif x==3:
-            bandera=0
+            bandera2=0
             try: 
-                bandera=1
+                bandera2=1
                 int(entryDato.get())
             except:
                 ventanaError=Tk()
@@ -733,11 +736,25 @@ def modEli():
                 labelError.place(x=10,y=100)
                 ventanaError.configure(bg='Tomato')
                 ventanaError.mainloop() 
-            if bandera==1:
+            if bandera2==1:
                 for contac in listaContactos:
                     if entryDato.get() in str(contac.numero):
                         nuevaLista+=[contac]
-        
+        if bandera==0:
+            ventana3=Tk()
+            ventana3.title('Resultados')
+            ventana3.geometry('800x500')
+            ventana3.configure(bg='Teal')
+            ventana3.resizable(FALSE,FALSE)
+            labelTitulo1 = Label(ventana3, text = "Resultados de la búsqueda" , bg="Teal", fg="Azure", font = ('calibri', 25))
+            labelTitulo1.place(x=40, y=20)
+            labelCantidad=Label(ventana3, text = "Cantidad: " , bg="Teal", fg="Azure", font = ('calibri', 15))
+            labelCantidad.place(x=500,y=20)
+            entryCantidad=Entry(ventana3)
+            entryCantidad.insert(0,len(nuevaLista))
+            entryCantidad.config(state='readonly')
+            entryCantidad.place(x=600,y=20)
+            tabla=ttk.Treeview(ventana3)
                 
     radioNombre = Radiobutton(ventana3, text = "Nombre", value = 1, variable = valor)
     radioNombre.place(x = 50, y = 90)
