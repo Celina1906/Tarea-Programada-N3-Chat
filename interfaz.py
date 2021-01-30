@@ -387,6 +387,22 @@ def boton2Funcion():
 def modificar():
     global listaContactos
     ventana=Tk()
+    ventana.config(bg='Teal')
+    ventana.title('Modificar contacto')
+    ventana.geometry('600x300')
+    ventana.resizable(FALSE,FALSE)
+    labelTitulo=Label(ventana,text='Modificar contacto', bg='Teal',fg="Azure", font=('arial',20))
+    labelTitulo.place(x=150,y=50)
+    labelNumero=Label(ventana,text='Número del contacto: ',bg='Teal',font=('',15))
+    labelNumero.place(x=120,y=130)
+    entryNumero=Entry(ventana)
+    entryNumero.place(x=300,y=130,width=140,height=30)
+    def buscarNumero():
+        for contac in listaContactos:
+            if entryNumero.get() == str(contac.numero):
+               print()
+    
+   
 def eliminar():
     global listaContactos
 
