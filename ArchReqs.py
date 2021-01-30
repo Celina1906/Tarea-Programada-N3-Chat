@@ -34,4 +34,3 @@ def obtenerFrases():
                 cont+=1
     return lista
 
-print(obtenerFrases())

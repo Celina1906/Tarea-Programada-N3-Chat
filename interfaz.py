@@ -9,7 +9,7 @@ import names
 import random
 from tkinter import ttk
 import re
-#import tkinter as tk
+from ArchReqs import *
 #Clase Contacto
 class Contacto:
     nombre=''
@@ -42,6 +42,7 @@ class Contacto:
 #Variables globales
 listaContactos=[]
 nomArchivo='contactos'
+listaFrases=[]
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Chat')
@@ -672,6 +673,7 @@ def eliminar():
             if entryNumero.get() == str(contac.numero):
                 bandera=1
                 listaContactos.remove(contac)
+                graba(nomArchivo,listaContactos)
         if bandera==0:
             ventanaCambio=Tk()
             ventanaCambio.title('No se encontró el contacto')
@@ -766,6 +768,27 @@ def boton5Funcion():
         labelError.place(x=10,y=100)
         ventanaError.configure(bg='Tomato')
         ventanaError.mainloop() 
+def boton6Funcion():
+    global listaFrases
+    try: 
+        listaFrases=obtenerFrases()
+        ventanaCambio=Tk()
+        ventanaCambio.title('Frases obtenidas')
+        ventanaCambio.geometry('600x300')
+        ventanaCambio.resizable(FALSE,FALSE)
+        labelCambio=Label(ventanaCambio,text='Frases obtenidas con éxito ', bg='Teal', font=('arial',20))
+        labelCambio.place(x=50,y=150)
+        ventanaCambio.configure(bg='Teal')
+        ventanaCambio.mainloop()
+    except:
+        ventanaError=Tk()
+        ventanaError.title('ERROR')
+        ventanaError.geometry('750x200')
+        ventanaError.resizable(FALSE,FALSE)
+        labelError=Label(ventanaError,text='ERROR: Ha ocurrido un error al obtener las frases', bg='Tomato',fg='AliceBlue', font=('arial',20))
+        labelError.place(x=10,y=100)
+        ventanaError.configure(bg='Tomato')
+        ventanaError.mainloop() 
 
 
 #Botones
@@ -774,7 +797,7 @@ boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,com
 boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2,command=modEli)
 boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2)
 boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2,command=boton5Funcion)
-boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2)
+boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2,command=boton6Funcion)
 boton7=Button(ventanaPrincipal,text='7. Chatear',width=25,height=2)
 boton8=Button(ventanaPrincipal,text='8. Reportes',width=13,height=2)
 boton9=Button(ventanaPrincipal,text='9. Ayuda',width=13,height=2)
