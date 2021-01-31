@@ -10,6 +10,7 @@ import random
 from tkinter import ttk
 import re
 from ArchReqs import *
+from Funciones import *
 #Clase Contacto
 class Contacto:
     nombre=''
@@ -45,6 +46,7 @@ nomArchivo='contactos'
 listaFrases=[]
 inicio=5
 ultimo2=-1
+registroChats=[]
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Chat')
@@ -891,6 +893,9 @@ def boton6Funcion():
         ventanaError.configure(bg='Tomato')
         ventanaError.mainloop() 
 def boton7Funcion():
+    global listaFrases
+    global listaContactos
+    global registroChats
     ventanaMod=Tk()
     ventanaMod.config(bg='Teal')
     ventanaMod.title('Cantidad de chat')
@@ -898,11 +903,32 @@ def boton7Funcion():
     ventanaMod.resizable(FALSE,FALSE)
     labelTitulo=Label(ventanaMod,text='Cantidad de chats', bg='Teal',fg="Azure", font=('arial',20))
     labelTitulo.place(x=150,y=50)
-    #labelNumero=Label(ventanaMod,text='Número del contacto: ',bg='Teal',font=('',15))
-    #labelNumero.place(x=120,y=130)
     entryNumero=Entry(ventanaMod)
     entryNumero.place(x=180,y=130,width=140,height=30)
-    botonAceptar=Button(ventanaMod,text='Aceptar',width=18,height=2)
+    def aceptar():
+        global listaFrases
+        global listaContactos
+        global registroChats
+        nChats=int(entryNumero.get())
+        while nChats!=0:
+            try:
+                nRandom=random.randrange(1,40)
+                Ulam=[nRandom] + sucesionUlam(nRandom)
+                nombreTxt="Chat"+str(nChats)
+                contactosChat=buscarPersonas(listaContactos)
+                registroChats+=[(contactosChat,nChats)]
+                grabarChats(nombreTxt,Ulam,listaFrases,contactosChat)
+                nChats-=1
+            except:
+                ventanaError=Tk()
+                ventanaError.title('ERROR')
+                ventanaError.geometry('750x200')
+                ventanaError.resizable(FALSE,FALSE)
+                labelError=Label(ventanaError,text='ERROR: Debe ingresar unicamente numeros.', bg='Tomato',fg='AliceBlue', font=('arial',20))
+                labelError.place(x=10,y=100)
+                ventanaError.configure(bg='Tomato')
+                ventanaError.mainloop() 
+    botonAceptar=Button(ventanaMod,text='Aceptar',width=18,height=2,command=aceptar)
     botonAceptar.place(x=370,y=250)
     def limpiar():
         entryNumero.delete(0,END)
@@ -945,6 +971,7 @@ def boton10Funcion():
     labelAutores.place(x=50,y=190)
     ventanaCambio.configure(bg='Teal')
     ventanaCambio.mainloop()
+
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)

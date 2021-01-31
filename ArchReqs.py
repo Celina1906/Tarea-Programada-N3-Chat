@@ -23,6 +23,15 @@ def obtenerFrases():
         if '''<p>1.- De todas las cosas que llevas puestas, tu <strong>actitud</strong> es la más importante.</p>''' in i:
             while contenido[cont]!='''<img loading="lazy" class="alignnone size-full wp-image-5196" src="https://amazonia-teamfactory.com/wp-content/uploads/2017/11/10.png" alt="" width="1200" height="200" srcset="https://amazonia-teamfactory.com/wp-content/uploads/2017/11/10.png 1200w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/10-300x50.png 300w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/10-768x128.png 768w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/10-1024x171.png 1024w" sizes="(max-width: 1200px) 100vw, 1200px" />''':
                 vTemp=contenido[cont]
+                if """<img loading="lazy" class="alignnone size-full wp-image-5205" src="https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2.png" alt="" width="1200" height="200" srcset="https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2.png 1200w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2-300x50.png 300w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2-768x128.png 768w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2-1024x171.png 1024w" sizes="(max-width: 1200px) 100vw, 1200px" />""" in vTemp:
+                    vTemp= vTemp.replace("<strong>","")
+                    vTemp= vTemp.replace("</strong>","")
+                    vTemp= vTemp.replace("""<img loading="lazy" class="alignnone size-full wp-image-5205" src="https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2.png" alt="" width="1200" height="200" srcset="https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2.png 1200w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2-300x50.png 300w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2-768x128.png 768w, https://amazonia-teamfactory.com/wp-content/uploads/2017/11/2-1024x171.png 1024w" sizes="(max-width: 1200px) 100vw, 1200px" />""","")
+                    print(vTemp)
+                    soup = BeautifulSoup(vTemp, 'html.parser')
+                    lista+=[soup.p.string]
+                    cont+=1
+                    continue
                 if "<img loading=" in vTemp:
                     cont+=1
                     continue
@@ -33,5 +42,3 @@ def obtenerFrases():
                 lista+=[soup.p.string]
                 cont+=1
     return lista
-
-print(obtenerFrases())
