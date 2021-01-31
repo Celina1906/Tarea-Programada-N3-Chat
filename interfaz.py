@@ -890,8 +890,23 @@ def boton6Funcion():
         labelError.place(x=10,y=100)
         ventanaError.configure(bg='Tomato')
         ventanaError.mainloop() 
-
-
+def boton10Funcion():
+    ventanaCambio=Tk()
+    ventanaCambio.title('Acerca de ')
+    ventanaCambio.geometry('600x300')
+    ventanaCambio.resizable(FALSE,FALSE)
+    labelCambio=Label(ventanaCambio,text='Acerca de', bg='Teal', font=('arial',20))
+    labelCambio.place(x=50,y=100)
+    labelNombre=Label(ventanaCambio,text='Sistema de informacion: Chat', bg='Teal', font=('arial',12))
+    labelNombre.place(x=50,y=130)
+    labelVersion=Label(ventanaCambio,text='Versión: 1', bg='Teal', font=('arial',12))
+    labelVersion.place(x=50,y=150)
+    labelFecha=Label(ventanaCambio,text='Fecha de creación: 17 de enero del 2021', bg='Teal', font=('arial',12))
+    labelFecha.place(x=50,y=170)
+    labelAutores=Label(ventanaCambio,text='Autores: Leandro Camacho Aguilar y Celina Madrigal Murillo', bg='Teal', font=('arial',12))
+    labelAutores.place(x=50,y=190)
+    ventanaCambio.configure(bg='Teal')
+    ventanaCambio.mainloop()
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
@@ -902,7 +917,7 @@ boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,heigh
 boton7=Button(ventanaPrincipal,text='7. Chatear',width=25,height=2)
 boton8=Button(ventanaPrincipal,text='8. Reportes',width=13,height=2)
 boton9=Button(ventanaPrincipal,text='9. Ayuda',width=13,height=2)
-boton10=Button(ventanaPrincipal,text='10. Acerca de',width=13,height=2)
+boton10=Button(ventanaPrincipal,text='10. Acerca de',width=13,height=2,command=boton10Funcion)
 boton11=Button(ventanaPrincipal,text='11. Salir',width=10,height=2,command= lambda:ventanaPrincipal.destroy())
 #Colocación de botones de pantalla principal
 boton1.place(x=25,y=120)
