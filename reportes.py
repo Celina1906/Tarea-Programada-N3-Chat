@@ -8,10 +8,12 @@ def reporte1(lista):
     Salidas: nombre del archico .csv
     '''
     nombreArchivo="ReporteContactosDelSistema"+".csv"
-    with open(str(nombreArchivo)+".csv","w",newline="") as csvfile:
+    with open(str(nombreArchivo),"w",newline="") as csvfile:
         nombreDeCampos=["Nombre","Apellidos","Tipo","Numero","Correo"]
         escribir= csv.DictWriter(csvfile,fieldnames=nombreDeCampos)
         escribir.writeheader()
         for i in lista:
             escribir.writerow({"Nombre":i.nombre,"Apellidos":i.apellidos,"Tipo":i.tipo,"Numero":i.numero,"Correos":i.correos})
         return nombreArchivo
+    
+reporte1([])
