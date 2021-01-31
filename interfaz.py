@@ -11,6 +11,7 @@ from tkinter import ttk
 import re
 from ArchReqs import *
 from Funciones import *
+from reportes import *
 #Clase Contacto
 class Contacto:
     nombre=''
@@ -940,18 +941,20 @@ def boton8Funcion():
     ventanaReportes.geometry('800x400')
     ventanaReportes.resizable(FALSE,FALSE)
     ventanaReportes.configure(bg='Teal')
-    boton1=Button(ventanaPrincipal,text='Reporte 1',width=18,height=2,command=boton1Funcion)
-    boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
-    boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2,command=modEli)
-    boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2,command=modEli)
-    boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2,command=boton5Funcion)
-    boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2,command=boton6Funcion)
-    boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
-    boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
-    boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2,command=modEli)
-    boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2,command=modEli)
-    boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2,command=boton5Funcion)
-    boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2,command=boton6Funcion)
+    labelTitulo = Label(ventanaReportes, text = "Reportes" , bg="Teal", fg="Azure", font = ('calibri', 40))
+    labelTitulo.place(x=20,y=30)
+    boton1=Button(ventanaReportes,text='Reporte 1',width=18,height=2,command=lambda:reporte1(listaContactos))
+    boton2=Button(ventanaReportes,text='Reporte 2',width=20,height=2,command=boton2Funcion)
+    boton3=Button(ventanaReportes,text='Reporte 3',width=20,height=2,command=modEli)
+    boton4=Button(ventanaReportes,text='Reporte 4',width=16,height=2,command=modEli)
+    boton5=Button(ventanaReportes,text='Reporte 5',width=18,height=2,command=boton5Funcion)
+    boton6=Button(ventanaReportes,text='Reporte 6',width=18,height=2,command=boton6Funcion)
+    boton1.place(x=25,y=120)
+    boton2.place(x=175,y=120)
+    boton3.place(x=340,y=120)
+    boton4.place(x=510,y=120)
+    boton5.place(x=650,y=120)
+    boton6.place(x=100,y=200)
 labelTitulo = Label(ventanaPrincipal, text = "Chat" , bg="Teal", fg="Azure", font = ('calibri', 40))
 labelTitulo.place(x=20,y=30)
 def boton10Funcion():
@@ -980,7 +983,7 @@ boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2,com
 boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2,command=boton5Funcion)
 boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2,command=boton6Funcion)
 boton7=Button(ventanaPrincipal,text='7. Chatear',width=25,height=2,command=boton7Funcion)
-boton8=Button(ventanaPrincipal,text='8. Reportes',width=13,height=2)
+boton8=Button(ventanaPrincipal,text='8. Reportes',width=13,height=2,command=boton8Funcion)
 boton9=Button(ventanaPrincipal,text='9. Ayuda',width=13,height=2)
 boton10=Button(ventanaPrincipal,text='10. Acerca de',width=13,height=2,command=boton10Funcion)
 boton11=Button(ventanaPrincipal,text='11. Salir',width=10,height=2,command= lambda:ventanaPrincipal.destroy())
