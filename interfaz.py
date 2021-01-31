@@ -735,8 +735,8 @@ def modEli():
         elif x==3:
             bandera2=0
             try: 
-                bandera2=1
                 int(entryDato.get())
+                bandera2=1
             except:
                 ventanaError=Tk()
                 ventanaError.title('ERROR')
@@ -775,12 +775,12 @@ def modEli():
             tabla.heading('Nombre',text='Nombre',anchor=CENTER)      
             tabla.heading('Apellidos',text='Apellidos',anchor=W)
             id=0 
-            if len(nuevaLista)>=5:
+            if len(nuevaLista)>5:
                 for con in nuevaLista[0:5]:
                     tabla.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
                     id+=1
             else:
-                for con in nuevaLista[0:len(nuevaLista)]:
+                for con in nuevaLista:
                     tabla.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
                     id+=1
             def flechaA():
@@ -801,7 +801,7 @@ def modEli():
                     for con in nuevaLista[inicio:len(nuevaLista)]:
                         tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
                         id+=1
-                        flechaAboton['state']=DISABLED
+                        #flechaAboton['state']=DISABLED
                 else:
                     for con in nuevaLista[inicio:inicio+5]:
                         tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
@@ -822,10 +822,11 @@ def modEli():
                 tabla2.heading('Apellidos',text='Apellidos',anchor=W)
                 id=0
                 ultimo=len(nuevaLista)-1
-                for con in nuevaLista[ultimo-4:ultimo]:
+                for con in nuevaLista[ultimo-5:ultimo]:
                     tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
                     id+=1
-                flechaBboton['state']=DISABLED
+                    ultimo-=4
+                #flechaBboton['state']=DISABLED
                 tabla2.place(x=100,y=200)
             flechaAboton=Button(ventana3,text='--->',width=18,height=2,command=flechaA)
             flechaAboton.place(x=400,y=450)
@@ -895,7 +896,7 @@ def boton6Funcion():
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
 boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2,command=modEli)
-boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2,modEli)
+boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2,command=modEli)
 boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2,command=boton5Funcion)
 boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2,command=boton6Funcion)
 boton7=Button(ventanaPrincipal,text='7. Chatear',width=25,height=2)
