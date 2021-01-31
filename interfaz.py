@@ -43,7 +43,8 @@ class Contacto:
 listaContactos=[]
 nomArchivo='contactos'
 listaFrases=[]
-ultimo=5
+inicio=5
+ultimo2=-1
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Chat')
@@ -675,6 +676,14 @@ def eliminar():
                 bandera=1
                 listaContactos.remove(contac)
                 graba(nomArchivo,listaContactos)
+                ventanaCambio=Tk()
+                ventanaCambio.title('Contacto eliminado')
+                ventanaCambio.geometry('600x300')
+                ventanaCambio.resizable(FALSE,FALSE)
+                labelCambio=Label(ventanaCambio,text='Contacto eliminado con éxito', bg='Teal', font=('arial',20))
+                labelCambio.place(x=50,y=150)
+                ventanaCambio.configure(bg='Teal')
+                ventanaCambio.mainloop()
         if bandera==0:
             ventanaCambio=Tk()
             ventanaCambio.title('No se encontró el contacto')
@@ -766,48 +775,70 @@ def modEli():
             tabla.heading('Nombre',text='Nombre',anchor=CENTER)      
             tabla.heading('Apellidos',text='Apellidos',anchor=W)
             id=0 
-            for con in nuevaLista[0:5]:
-                tabla.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
-                id+=1
-                
+            if len(nuevaLista)>=5:
+                for con in nuevaLista[0:5]:
+                    tabla.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
+                    id+=1
+            else:
+                for con in nuevaLista[0:len(nuevaLista)]:
+                    tabla.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
+                    id+=1
             def flechaA():
-                global ultimo
-                try:
-                    tabla2=ttk.Treeview(ventana3)
-                    tabla2['columns']=('Número','Nombre','Apellidos')
-                    tabla2.column('#0',width=0,minwidth=0)
-                    tabla2.column('Número',width=120,minwidth=25)
-                    tabla2.column('Nombre',anchor=CENTER,width=120) 
-                    tabla2.column('Apellidos',anchor=W,width=120)
-                    tabla2.heading('#0',text='',anchor=W)
-                    tabla2.heading('Número',text='Número',anchor=W)
-                    tabla2.heading('Nombre',text='Nombre',anchor=CENTER)      
-                    tabla2.heading('Apellidos',text='Apellidos',anchor=W)
-                    id=0
-                    for con in nuevaLista[ultimo:ultimo+5]:
+                global inicio
+                tabla2=ttk.Treeview(ventana3)
+                tabla2['columns']=('Número','Nombre','Apellidos')
+                tabla2.column('#0',width=0,minwidth=0)
+                tabla2.column('Número',width=120,minwidth=25)
+                tabla2.column('Nombre',anchor=CENTER,width=120) 
+                tabla2.column('Apellidos',anchor=W,width=120)
+                tabla2.heading('#0',text='',anchor=W)
+                tabla2.heading('Número',text='Número',anchor=W)
+                tabla2.heading('Nombre',text='Nombre',anchor=CENTER)      
+                tabla2.heading('Apellidos',text='Apellidos',anchor=W)
+                id=0
+                fin=len(nuevaLista)
+                if inicio+5>=len(nuevaLista):
+                    for con in nuevaLista[inicio:len(nuevaLista)]:
                         tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
                         id+=1
-                        ultimo+=5
-                    tabla2.place(x=100,y=200)
-                except:
-                    tabla3=ttk.Treeview(ventana3)
-                    tabla3['columns']=('Número','Nombre','Apellidos')
-                    tabla3.column('#0',width=0,minwidth=0)
-                    tabla3.column('Número',width=120,minwidth=25)
-                    tabla3.column('Nombre',anchor=CENTER,width=120) 
-                    tabla3.column('Apellidos',anchor=W,width=120)
-                    tabla3.heading('#0',text='',anchor=W)
-                    tabla3.heading('Número',text='Número',anchor=W)
-                    tabla3.heading('Nombre',text='Nombre',anchor=CENTER)      
-                    tabla3.heading('Apellidos',text='Apellidos',anchor=W)
-                    id=0
-                    for con in nuevaLista[ultimo:len(nuevaLista)]:
+                        flechaAboton['state']=DISABLED
+                else:
+                    for con in nuevaLista[inicio:inicio+5]:
                         tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
                         id+=1
-                    tabla3.place(x=100,y=200)
+                    inicio+=5
+                tabla2.place(x=100,y=200)
+            def flechaB():
+                flechaAboton['state']=NORMAL
+                tabla2=ttk.Treeview(ventana3)
+                tabla2['columns']=('Número','Nombre','Apellidos')
+                tabla2.column('#0',width=0,minwidth=0)
+                tabla2.column('Número',width=120,minwidth=25)
+                tabla2.column('Nombre',anchor=CENTER,width=120) 
+                tabla2.column('Apellidos',anchor=W,width=120)
+                tabla2.heading('#0',text='',anchor=W)
+                tabla2.heading('Número',text='Número',anchor=W)
+                tabla2.heading('Nombre',text='Nombre',anchor=CENTER)      
+                tabla2.heading('Apellidos',text='Apellidos',anchor=W)
+                id=0
+                ultimo=len(nuevaLista)-1
+                for con in nuevaLista[ultimo-4:ultimo]:
+                    tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
+                    id+=1
+                flechaBboton['state']=DISABLED
+                tabla2.place(x=100,y=200)
             flechaAboton=Button(ventana3,text='--->',width=18,height=2,command=flechaA)
-            flechaAboton.place(x=100,y=400)
+            flechaAboton.place(x=400,y=450)
+            flechaBboton=Button(ventana3,text='<---',width=18,height=2,command=flechaB)
+            flechaBboton.place(x=200,y=450)
+            if len(nuevaLista)<=5:
+                flechaAboton['state']=DISABLED
+                flechaBboton['state']=DISABLED
             tabla.place(x=100,y=200)
+            botonModificar=Button(ventana3,text='Modificar',width=20,height=2,command=modificar)
+            botonModificar.place(x=200,y=120)
+            botonEliminar=Button(ventana3,text='Eliminar',width=20,height=2,command=eliminar)
+            botonEliminar.place(x=400,y=120)
     radioNombre = Radiobutton(ventana3, text = "Nombre", value = 1, variable = valor)
     radioNombre.place(x = 50, y = 90)
     radioApellidos = Radiobutton(ventana3, text = "Apellidos", value = 2, variable = valor)
@@ -864,7 +895,7 @@ def boton6Funcion():
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
 boton3=Button(ventanaPrincipal,text='3. Modificar contacto',width=20,height=2,command=modEli)
-boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2)
+boton4=Button(ventanaPrincipal,text='4. Eliminar contacto',width=16,height=2,modEli)
 boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2,command=boton5Funcion)
 boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2,command=boton6Funcion)
 boton7=Button(ventanaPrincipal,text='7. Chatear',width=25,height=2)
