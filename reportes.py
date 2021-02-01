@@ -13,7 +13,7 @@ def reporte1(lista):
         escribir= csv.DictWriter(csvfile,fieldnames=nombreDeCampos)
         escribir.writeheader()
         for i in lista:
-            escribir.writerow({"Nombre":i.nombre,"Apellidos":i.apellidos,"Tipo":str(i.tipo),"Numero":str(i.numero),"Correo":str(i.correo)})
+            escribir.writerow({"Nombre":i.nombre,"Apellidos":i.apellidos,"Tipo":str(i.tipo),"Numero":str(i.numero),"Correos":str(i.correo)})
         return nombreArchivo
         
 def reporte2(lista):
