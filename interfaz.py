@@ -911,6 +911,7 @@ def boton7Funcion():
         global listaContactos
         global registroChats
         nChats=int(entryNumero.get())
+        bandera=0
         while nChats!=0:
             try:
                 nRandom=random.randrange(1,40)
@@ -921,6 +922,7 @@ def boton7Funcion():
                 grabarChats(nombreTxt,Ulam,listaFrases,contactosChat)
                 nChats-=1
             except:
+                bandera=1
                 ventanaError=Tk()
                 ventanaError.title('ERROR')
                 ventanaError.geometry('750x200')
@@ -929,6 +931,15 @@ def boton7Funcion():
                 labelError.place(x=10,y=100)
                 ventanaError.configure(bg='Tomato')
                 ventanaError.mainloop() 
+        if bandera==0:
+            ventanaCambio=Tk()
+            ventanaCambio.title('Chats generados')
+            ventanaCambio.geometry('600x300')
+            ventanaCambio.resizable(FALSE,FALSE)
+            labelCambio=Label(ventanaCambio,text='Chats generados con éxito ', bg='Teal', font=('arial',20))
+            labelCambio.place(x=50,y=150)
+            ventanaCambio.configure(bg='Teal')
+            ventanaCambio.mainloop()
     botonAceptar=Button(ventanaMod,text='Aceptar',width=18,height=2,command=aceptar)
     botonAceptar.place(x=370,y=250)
     def limpiar():
