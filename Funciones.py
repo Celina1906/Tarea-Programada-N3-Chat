@@ -20,11 +20,6 @@ def grabarChats(nomArchGrabar,listaUlam,listaFrases,listaContactos):
     Salida:nada o un mensaje de error
     """
     nomArchGrabar+=".txt"
-    print(nomArchGrabar)
-    print(listaUlam)
-    print(listaContactos)
-    print(len(listaFrases))
-    #try:
     f=open(nomArchGrabar,"w",encoding="utf-8")
     f.writelines("#"+str(listaUlam)+"\n")
     f.writelines("#Extraido de: https://amazonia-teamfactory.com/blog/las-50-mejores-frases-de-motivacion-en-el-trabajo/"+"\n")    

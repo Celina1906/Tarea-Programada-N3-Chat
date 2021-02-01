@@ -915,11 +915,11 @@ def boton7Funcion():
         while nChats!=0:
             try:
                 nRandom=random.randrange(1,40)
-                Ulam=[nRandom] + sucesionUlam(nRandom)
+                ulam=[nRandom] + sucesionUlam(nRandom)
                 nombreTxt="Chat"+str(nChats)
                 contactosChat=buscarPersonas(listaContactos)
-                registroChats+=[(contactosChat,nChats)]
-                grabarChats(nombreTxt,Ulam,listaFrases,contactosChat)
+                registroChats+=[[contactosChat,nChats,len(ulam)]]
+                grabarChats(nombreTxt,ulam,listaFrases,contactosChat)
                 nChats-=1
             except:
                 bandera=1
@@ -947,6 +947,7 @@ def boton7Funcion():
     botonLimpiar=Button(ventanaMod,text='Limpiar',width=18,height=2,command=limpiar)
     botonLimpiar.place(x=100,y=250)
 def boton8Funcion():
+    global registroChats
     ventanaReportes=Tk()
     ventanaReportes.title('Chat')
     ventanaReportes.geometry('800x400')
@@ -958,8 +959,8 @@ def boton8Funcion():
     boton2=Button(ventanaReportes,text='Reporte 2',width=20,height=2,command=lambda:reporte2(listaContactos))
     boton3=Button(ventanaReportes,text='Reporte 3',width=20,height=2,command=lambda:reporte3(listaContactos))
     boton4=Button(ventanaReportes,text='Reporte 4',width=16,height=2,command=lambda:reporte4(listaFrases))
-    boton5=Button(ventanaReportes,text='Reporte 5',width=18,height=2,command=boton5Funcion)
-    boton6=Button(ventanaReportes,text='Reporte 6',width=18,height=2,command=boton6Funcion)
+    boton5=Button(ventanaReportes,text='Reporte 5',width=18,height=2,command=lambda:reporte5(registroChats))
+    boton6=Button(ventanaReportes,text='Reporte 6',width=18,height=2,command=lambda:reporte6(registroChats))
     boton1.place(x=25,y=120)
     boton2.place(x=175,y=120)
     boton3.place(x=340,y=120)

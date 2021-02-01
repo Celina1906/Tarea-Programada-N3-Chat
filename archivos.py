@@ -32,6 +32,18 @@ def lee (nomArchLeer):
         print("Error al leer el archivo: ", nomArchLeer)
     return contactos
 
+def leeChat (nomArchLeer):
+    '''
+    Funcionamiento: Función que lee un archivo
+    Entradas: nombre del archivo
+    Salidas: NA
+    '''
+    file = open(nomArchLeer, "r",encoding='UTF-8')
+    resultado = file.read()
+    file.close()
+
+    return resultado
+
 def grabarXml(nomArchGrabar,lista):
     """
     Funcion:Guarda el archivo 
