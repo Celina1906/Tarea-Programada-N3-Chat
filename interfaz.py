@@ -1,6 +1,6 @@
 #Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
 #Fecha de Creación: 17/1/2021 10:43am 
-#Fecha de última Modificación: 1/2/2021 9:32pm
+#Fecha de última Modificación: 1/2/2021 7:06pm
 #Versión: 3.9.0
 #Importaciones
 from tkinter import *
@@ -12,6 +12,7 @@ import re
 from ArchReqs import *
 from Funciones import *
 from reportes import *
+import subprocess 
 #Clase Contacto
 class Contacto:
     nombre=''
@@ -144,12 +145,22 @@ def boton1Funcion():
             ventanaError.configure(bg='Tomato')
             ventanaError.mainloop()
     def limpiar():
+        '''
+        Funcionamiento: Limpia los espacios 
+        Entradas: NA
+        Salidas: NA
+        '''
         entryCantContactos.delete(0,END)
     botonAceptar=Button(ventana1,text='Aceptar',width=18,height=2,command=aceptar1)
     botonAceptar.place(x=300,y=250)
     botonLimpiar=Button(ventana1,text='Limpiar',width=18,height=2,command=limpiar)
     botonLimpiar.place(x=460,y=250)
 def boton2Funcion():
+    '''
+    Funcionamiento: Crea la ventana del segundo botón
+    Entradas: NA
+    Salidas: NA
+    '''
     ventana2=Tk()
     ventana2.title('Insertar contacto')
     ventana2.geometry('600x500')
@@ -192,6 +203,11 @@ def boton2Funcion():
     comboCorreo3=ttk.Combobox(ventana2,values=['Particular','Laboral'])
     comboCorreo3.place(x=210,y=360)  
     def limpiar():
+        '''
+        Funcionamiento: Limpia los espacios
+        Entradas: NA
+        Salidas: NA
+        '''
         entryNombre.delete(0,END)
         entryApellidos.delete(0,END)
         entryNumero.delete(0,END)
@@ -203,6 +219,11 @@ def boton2Funcion():
         comboCorreo2.set('')
         comboCorreo3.set('')
     def ingresar():
+        '''
+        Funcionamiento: Ingresa un contacto
+        Entradas: NA
+        Salidas: NA
+        '''
         global listaContactos
         correo1=0
         correo2=0
@@ -377,20 +398,16 @@ def boton2Funcion():
         labelCambio.place(x=50,y=150)
         ventanaCambio.configure(bg='Teal')
         ventanaCambio.mainloop()
-        print (listaContactos)
-        for i in listaContactos:
-            print(i.nombre)
-            print(i.apellidos)
-            print(i.tipo)
-            print(i.numero)
-            print(i.correo)
-            print()
     botonLimpiar=Button(ventana2,text='Limpiar',width=18,height=2,command=limpiar)
     botonLimpiar.place(x=60,y=440)    
     botonAceptar=Button(ventana2,text='Aceptar',width=18,height=2,command=ingresar)
     botonAceptar.place(x=200,y=440)
-
 def modificar():
+    '''
+    Funcionamiento: Modifica un contacto
+    Entradas: NA
+    Salidas: NA
+    '''
     global listaContactos
     ventanaMod=Tk()
     ventanaMod.config(bg='Teal')
@@ -404,6 +421,11 @@ def modificar():
     entryNumero=Entry(ventanaMod)
     entryNumero.place(x=330,y=130,width=140,height=30)
     def buscarNumero():
+        '''
+        Funcionamiento: Busca un contacto por su número
+        Entradas: NA
+        Salidas: NA
+        '''
         bandera=0
         for contac in listaContactos:
             if entryNumero.get() == str(contac.numero):
@@ -450,6 +472,11 @@ def modificar():
                 comboCorreo3=ttk.Combobox(ventanaMod2,values=['Particular','Laboral'])
                 comboCorreo3.place(x=210,y=360)  
                 def limpiar():
+                    '''
+                    Funcionamiento: Limpia los espacios
+                    Entradas: NA
+                    Salidas: NA
+                    '''
                     entryNombre.delete(0,END)
                     entryApellidos.delete(0,END)
                     entryNumero2.delete(0,END)
@@ -461,6 +488,11 @@ def modificar():
                     comboCorreo2.set('')
                     comboCorreo3.set('')
                 def ingresar():
+                    '''
+                    Funcionamiento: Ingresa el usuario modificado
+                    Entradas: NA
+                    Salidas: NA
+                    '''
                     global listaContactos
                     correo1=0
                     correo2=0
@@ -635,14 +667,6 @@ def modificar():
                     labelCambio.place(x=50,y=150)
                     ventanaCambio.configure(bg='Teal')
                     ventanaCambio.mainloop()
-                    print (listaContactos)
-                    for i in listaContactos:
-                        print(i.nombre)
-                        print(i.apellidos)
-                        print(i.tipo)
-                        print(i.numero)
-                        print(i.correo)
-                        print()
                 botonLimpiar=Button(ventanaMod2,text='Limpiar',width=18,height=2,command=limpiar)
                 botonLimpiar.place(x=60,y=440)    
                 botonAceptar=Button(ventanaMod2,text='Aceptar',width=18,height=2,command=ingresar)
@@ -658,8 +682,12 @@ def modificar():
             ventanaCambio.mainloop()
     botonAceptar=Button(ventanaMod,text='Aceptar',width=18,height=2,command=buscarNumero)
     botonAceptar.place(x=200,y=200)
-   
 def eliminar():
+    '''
+    Funcionamiento: Elimina un contacto
+    Entradas: NA
+    Salidas: NA
+    '''
     global listaContactos
     ventanaMod=Tk()
     ventanaMod.config(bg='Teal')
@@ -673,6 +701,11 @@ def eliminar():
     entryNumero=Entry(ventanaMod)
     entryNumero.place(x=330,y=130,width=140,height=30)
     def buscarNumero():
+        '''
+        Funcionamiento: Busca un contacto por su número
+        Entradas: NA
+        Salidas: NA
+        '''
         bandera=0
         for contac in listaContactos:
             if entryNumero.get() == str(contac.numero):
@@ -699,8 +732,12 @@ def eliminar():
     botonAceptar=Button(ventanaMod,text='Aceptar',width=18,height=2,command=buscarNumero)
     botonAceptar.place(x=200,y=200)
     ventanaMod.mainloop()
-   
 def modEli():
+    '''
+    Funcionamiento: Crea la ventana del botón 3 y 4
+    Entradas: NA
+    Salidas: NA
+    '''
     ventana3=Toplevel()
     ventana3.title('Modificar/Eliminar')
     ventana3.geometry('800x300')
@@ -713,6 +750,11 @@ def modEli():
     entryDato.place(x=270,y=150)
     valor = IntVar()
     def aceptar():
+        '''
+        Funcionamiento: Busca un contacto por similitud
+        Entradas: NA
+        Salidas: NA
+        '''
         global listaContactos
         bandera=0
         nuevaLista=[]
@@ -787,6 +829,11 @@ def modEli():
                     tabla.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
                     id+=1
             def flechaA():
+                '''
+                Funcionamiento: Adelanta los contactos
+                Entradas: NA
+                Salidas: NA
+                '''
                 global inicio
                 tabla2=ttk.Treeview(ventana3)
                 tabla2['columns']=('Número','Nombre','Apellidos')
@@ -812,6 +859,11 @@ def modEli():
                     inicio+=5
                 tabla2.place(x=100,y=200)
             def flechaB():
+                '''
+                Funcionamiento: Atrasa los contactos
+                Entradas: NA
+                Salidas: NA
+                '''
                 flechaAboton['state']=NORMAL
                 tabla2=ttk.Treeview(ventana3)
                 tabla2['columns']=('Número','Nombre','Apellidos')
@@ -829,7 +881,6 @@ def modEli():
                     tabla2.insert(parent='',index='end',iid=id,text='',values=(con.numero,con.nombre,con.apellidos))
                     id+=1
                     ultimo-=4
-                #flechaBboton['state']=DISABLED
                 tabla2.place(x=100,y=200)
             flechaAboton=Button(ventana3,text='--->',width=18,height=2,command=flechaA)
             flechaAboton.place(x=400,y=450)
@@ -851,8 +902,12 @@ def modEli():
     radioNumero.place(x = 50, y = 150)
     botonAceptar=Button(ventana3,text='Aceptar',width=18,height=2,command=aceptar)
     botonAceptar.place(x=370,y=250)
-
 def boton5Funcion():
+    '''
+    Funcionamiento: Crea la ventana del botón 5 
+    Entradas: NA
+    Salidas: NA
+    '''
     try:
         grabarXml('contactosXML',listaContactos)
         ventanaCambio=Tk()
@@ -873,6 +928,11 @@ def boton5Funcion():
         ventanaError.configure(bg='Tomato')
         ventanaError.mainloop() 
 def boton6Funcion():
+    '''
+    Funcionamiento: Crea la ventana del botón 6
+    Entradas: NA
+    Salidas: NA
+    '''
     global listaFrases
     try: 
         listaFrases=obtenerFrases()
@@ -894,6 +954,11 @@ def boton6Funcion():
         ventanaError.configure(bg='Tomato')
         ventanaError.mainloop() 
 def boton7Funcion():
+    '''
+    Funcionamiento: Crea la ventana del botón 7
+    Entradas: NA
+    Salidas: NA
+    '''
     global listaFrases
     global listaContactos
     global registroChats
@@ -907,6 +972,11 @@ def boton7Funcion():
     entryNumero=Entry(ventanaMod)
     entryNumero.place(x=180,y=130,width=140,height=30)
     def aceptar():
+        '''
+        Funcionamiento: Genera los chats
+        Entradas: NA
+        Salidas: NA
+        '''
         global listaFrases
         global listaContactos
         global registroChats
@@ -943,14 +1013,24 @@ def boton7Funcion():
     botonAceptar=Button(ventanaMod,text='Aceptar',width=18,height=2,command=aceptar)
     botonAceptar.place(x=370,y=250)
     def limpiar():
+        '''
+        Funcionamiento: limpia los espacios
+        Entradas: NA
+        Salidas: NA
+        '''
         entryNumero.delete(0,END)
     botonLimpiar=Button(ventanaMod,text='Limpiar',width=18,height=2,command=limpiar)
     botonLimpiar.place(x=100,y=250)
 def boton8Funcion():
+    '''
+    Funcionamiento: Crea la ventana del botón 8
+    Entradas: NA
+    Salidas: NA
+    '''
     global registroChats
     ventanaReportes=Tk()
     ventanaReportes.title('Chat')
-    ventanaReportes.geometry('800x400')
+    ventanaReportes.geometry('800x250')
     ventanaReportes.resizable(FALSE,FALSE)
     ventanaReportes.configure(bg='Teal')
     labelTitulo = Label(ventanaReportes, text = "Reportes" , bg="Teal", fg="Azure", font = ('calibri', 40))
@@ -966,10 +1046,23 @@ def boton8Funcion():
     boton3.place(x=340,y=120)
     boton4.place(x=510,y=120)
     boton5.place(x=650,y=120)
-    boton6.place(x=100,y=200)
+    boton6.place(x=300,y=200)
 labelTitulo = Label(ventanaPrincipal, text = "Chat" , bg="Teal", fg="Azure", font = ('calibri', 40))
 labelTitulo.place(x=20,y=30)
+def boton9Funcion():
+    '''
+    Funcionamiento: Abre el manual de usuario
+    Entradas: NA
+    Salidas: NA
+    '''
+    #!Se hizo así ya que en el la especificación no decía como hacerlo
+    subprocess.Popen(['Manual_de_usuario.pdf'],shell=True) 
 def boton10Funcion():
+    '''
+    Funcionamiento: Da la información del programa
+    Entradas: NA
+    Salidas: NA
+    '''
     ventanaCambio=Tk()
     ventanaCambio.title('Acerca de ')
     ventanaCambio.geometry('600x300')
@@ -986,7 +1079,6 @@ def boton10Funcion():
     labelAutores.place(x=50,y=190)
     ventanaCambio.configure(bg='Teal')
     ventanaCambio.mainloop()
-
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Llenar BD',width=18,height=2,command=boton1Funcion)
 boton2=Button(ventanaPrincipal,text='2. Insertar contacto',width=20,height=2,command=boton2Funcion)
@@ -996,7 +1088,7 @@ boton5=Button(ventanaPrincipal,text='5. Exportar BD a XML',width=18,height=2,com
 boton6=Button(ventanaPrincipal,text='6. Extraer frases célebres',width=18,height=2,command=boton6Funcion)
 boton7=Button(ventanaPrincipal,text='7. Chatear',width=25,height=2,command=boton7Funcion)
 boton8=Button(ventanaPrincipal,text='8. Reportes',width=13,height=2,command=boton8Funcion)
-boton9=Button(ventanaPrincipal,text='9. Ayuda',width=13,height=2)
+boton9=Button(ventanaPrincipal,text='9. Ayuda',width=13,height=2,command=boton9Funcion)
 boton10=Button(ventanaPrincipal,text='10. Acerca de',width=13,height=2,command=boton10Funcion)
 boton11=Button(ventanaPrincipal,text='11. Salir',width=10,height=2,command= lambda:ventanaPrincipal.destroy())
 #Colocación de botones de pantalla principal
@@ -1012,5 +1104,3 @@ boton9.place(x=600,y=200)
 boton10.place(x=300,y=280)
 boton11.place(x=450,y=280)
 ventanaPrincipal.mainloop()
-
-

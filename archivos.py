@@ -1,6 +1,6 @@
 #Elaborado por: Leandro Camacho y Celina Madrigal
 #Fecha de creación: 27/1/2021 8:01 am
-#Fecha de última modificación: 1/2/2021 9:32pm
+#Fecha de última modificación: 1/2/2021 6:47 am
 #Versión 3.9.0
 #Importación de librerías:
 import pickle
@@ -17,7 +17,6 @@ def graba(nomArchGrabar,contactos):
         f.close()
     except:
         print("Error al grabar el archivo: ", nomArchGrabar)
-
 def lee (nomArchLeer):
     '''
     Funcionamiento: Función que lee un archivo
@@ -31,7 +30,6 @@ def lee (nomArchLeer):
     except:
         print("Error al leer el archivo: ", nomArchLeer)
     return contactos
-
 def leeChat (nomArchLeer):
     '''
     Funcionamiento: Función que lee un archivo
@@ -41,9 +39,7 @@ def leeChat (nomArchLeer):
     file = open(nomArchLeer, "r",encoding='UTF-8')
     resultado = file.read()
     file.close()
-
     return resultado
-
 def grabarXml(nomArchGrabar,lista):
     """
     Funcion:Guarda el archivo 
@@ -62,6 +58,4 @@ def grabarXml(nomArchGrabar,lista):
         f.writelines("\t\t<correo>"+str(i.correo)+"</correo>\n")
     f.writelines("</Contactos>\n")
     f.close()
-    return ""
-
-        
+    return ""       

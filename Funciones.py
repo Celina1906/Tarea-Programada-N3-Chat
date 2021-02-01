@@ -1,6 +1,17 @@
+#Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
+#Fecha de Creación: 31/01/2021 2:40pm 
+#Fecha de última Modificación: 1/02/2021 6:46am
+#Versión: 3.9.0
+#Importaciones
+import random
 from time import strftime,sleep
+#Funciones
 def sucesionUlam(num):
-    #!Sumar el numero a la lista desde la llamada print([var] + sucesionUlam(var))
+    '''
+    Funcionamiento: Hce la sucesión ulam para los chats
+    Entradas: número
+    Salidas: lista con números
+    '''
     if num==1:
         return []
     if num>=35:
@@ -17,7 +28,7 @@ def grabarChats(nomArchGrabar,listaUlam,listaFrases,listaContactos):
     """
     Funcion:Guarda el archivo 
     Entrada:El nombre del archivo y la lista con los elementos
-    Salida:nada o un mensaje de error
+    Salida:nada 
     """
     nomArchGrabar+=".txt"
     f=open(nomArchGrabar,"w",encoding="utf-8")
@@ -35,9 +46,12 @@ def grabarChats(nomArchGrabar,listaUlam,listaFrases,listaContactos):
         sleep(0.3)
     f.close()
     return ""
-
-import random
 def buscarPersonas(listaContactos):
+    """
+    Funcion:Hace una lista con dos contactos distintos
+    Entrada:lista con todos los contactos
+    Salida:lista con los dos contactos distintos
+    """
     persona1=random.choice(listaContactos)
     persona2=random.choice(listaContactos)
     while persona1==persona2:
