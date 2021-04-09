@@ -1001,4 +1001,4 @@ boton10.place(x=300,y=280)
 boton11.place(x=450,y=280)
 ventanaPrincipal.mainloop()
 
-
+#hola djmkflnmsdjflhnsdfkjsdfkljwoiueraslkjalksjd
